@@ -1,10 +1,9 @@
 import pandas as pd
 from pandas.tseries.offsets import MonthEnd
 
-# --- STEP 1: PREPROCESS ZILLOW RENT DATA (Zip 22903) ---
 
 # Load the raw ZORI dataset
-zillow_file = 'Zip_zori_uc_sfrcondomfr_sm_month.csv'
+zillow_file = './DATA/Zip_zori_uc_sfrcondomfr_sm_month.csv'
 df_zillow_raw = pd.read_csv(zillow_file)
 
 # Filter for UVA area zip code
@@ -31,7 +30,7 @@ df_rent_final = df_rent_long[['ds', 'y']].sort_values('ds').reset_index(drop=Tru
 # --- STEP 2: PREPROCESS BLS EMPLOYMENT DATA (Charlottesville MSA) ---
 
 # Load BLS file, skipping the first 10 rows of metadata
-employment_file = 'SeriesReport-20260311082221_73518f.csv'
+employment_file = './DATA/SeriesReport-20260311082221_73518f.csv'
 df_emp_raw = pd.read_csv(employment_file, skiprows=10)
 
 # Melt from wide to long format
@@ -59,12 +58,11 @@ df_emp_full = df_emp_final.reindex(full_range).interpolate(method='linear').rese
 df_emp_full.rename(columns={'index': 'ds'}, inplace=True)
 
 
-# --- STEP 3: MERGE INTO FINAL MASTER DATASET ---
 
 # Use an inner join to keep only months where both sources have data
 df_master = pd.merge(df_rent_final, df_emp_full, on='ds', how='inner')
 
-# Save the final robust master dataset for use in Meta Prophet
-df_master.to_csv('Charlottesville_Rent_Employment_Master.csv', index=False)
+# Save the final dataset for use in Meta Prophet
+df_master.to_csv('./DATA/Charlottesville_Rent_Employment_Master.csv', index=False)
 
-print("Master dataset saved as 'Charlottesville_Rent_Employment_Master.csv'.")
+print("Dataset saved as './DATA/Charlottesville_Rent_Employment_Master.csv'.")
