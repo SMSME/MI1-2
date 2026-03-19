@@ -2,12 +2,12 @@ import pandas as pd
 from pandas.tseries.offsets import MonthEnd
 
 
-# Load ZORI dataset
-zillow_file = './DATA/Zip_zori_uc_sfrcondomfr_sm_month.csv'
+# Load Zillow rent dataset
+zillow_file = '../DATA/Zillow_Rent_Data.csv'
 df_zillow_raw = pd.read_csv(zillow_file)
 
 # Filter for UVA area zip code
-df_22903 = df_zillow_raw[df_zillow_raw['RegionName'] == 22903]
+df_22903 = df_zillow_raw[df_zillow_raw['RegionName'].astype(str) == '22903']
 
 # Filter out metadata columns
 metadata_cols = ['RegionID', 'SizeRank', 'RegionName', 'RegionType', 'StateName', 'State', 'City', 'Metro', 'CountyName']
@@ -27,8 +27,8 @@ df_rent_final = df_rent_long[['ds', 'y']].sort_values('ds').reset_index(drop=Tru
 
 
 
-# Load BLS file, skipping the first 10 rows of metadata since they are not data
-employment_file = './DATA/SeriesReport-20260311082221_73518f.csv'
+# Load employment dataset, skipping metadata rows
+employment_file = '../DATA/Charlottesville_Employment_Data.csv'
 df_emp_raw = pd.read_csv(employment_file, skiprows=10)
 
 # Melt from wide to long format such that we get one row per date
@@ -63,4 +63,4 @@ df_master = pd.merge(df_rent_final, df_emp_full, on='ds', how='inner')
 # Save the final dataset
 df_master.to_csv('../DATA/Charlottesville_Rent_Employment_Master.csv', index=False)
 
-print("Dataset saved as '../DATA/Charlottesville_Rent_Employment_Master.csv'.")d
+print("Dataset saved as '../DATA/Charlottesville_Rent_Employment_Master.csv'.")
