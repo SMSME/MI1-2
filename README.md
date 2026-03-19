@@ -1,5 +1,8 @@
 # MI1-2
 
+## A Map of Documentation
+
+```text
 MI1-2/
 ├── DATA/
 │   ├── Charlottesville_Employment_Data.csv
@@ -23,3 +26,4 @@ MI1-2/
 ├── Makefile
 ├── README.md
 └── requirements.txt
+```
