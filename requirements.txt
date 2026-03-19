@@ -4,3 +4,7 @@ numpy
 scipy
 seaborn
 matplotlib
+prophet
+pyprojroot
+scikit-learn
+dieboldmariano
