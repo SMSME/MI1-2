@@ -1,3 +1,12 @@
+jupyter
 pandas
+numpy
+scipy
+seaborn
+matplotlib
+prophet
+pyprojroot
+scikit-learn
+dieboldmarianopandas
 matplotlib
 seaborn
