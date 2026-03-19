@@ -7,4 +7,6 @@ matplotlib
 prophet
 pyprojroot
 scikit-learn
-dieboldmariano
+dieboldmarianopandas
+matplotlib
+seaborn
