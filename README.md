@@ -2,8 +2,14 @@
 
 ## Software And Platform ##
 - For the software, we have used Python (v3.11.7) for all the scripts and data analysis with the following required add-on packages:
-    - pandas (v3.0.1) for  manipulation of .csv files into usable data frames
-    - matplotlib (v3.10.8) and seaborn (v0.13.2) for data visualization and plotting 
+    - pandas (v3.0.1) for manipulation of .csv files into usable data frames
+    - numpy (v2.4.3) for numerical operations
+    - scipy (v1.17.1) for statistical tests used in the analysis
+    - scikit-learn (v1.8.0) for evaluation metrics (e.g., MAE)
+    - prophet (v1.3.0) for time-series modeling
+    - dieboldmariano (v1.1.0) for forecast comparison (DM test)
+    - pyprojroot (v0.3.0) for robust project-path handling
+    - matplotlib (v3.10.8) and seaborn (v0.13.2) for data visualization and plotting
 
 ## Instructions for Reproducing Results
 ### Analysis
