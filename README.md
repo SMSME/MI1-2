@@ -42,7 +42,8 @@ source .venv/bin/activate # MAC
         - Command: ```
                         python3 eda.py
                         ```
-# MI1-2
+
+- **Producing and Running Analysis:** All analysis and model creation was done in a jupyter notebook. To see the step by step logic and results, click the play button next to each cell in sequential order. Additionally, at the top of the notebook you can choose `Run All`
 
 ## A Map of Documentation
 
