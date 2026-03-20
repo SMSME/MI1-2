@@ -43,7 +43,7 @@ source .venv/bin/activate # MAC
                         python3 eda.py
                         ```
 
-- **Producing and Running Analysis:** All analysis and model creation was done in a jupyter notebook. To see the step by step logic and results, click the play button next to each cell in sequential order. Additionally, at the top of the notebook you can choose `Run All`
+- **Producing and Running Analysis:** All analysis and model creation was done in a jupyter notebook. To see the step by step logic and results, click the play button next to each cell in sequential order. Alternatively, at the top of the notebook you can choose `Run All` to run all the cells at once. This will take some time as the the hyperparameter tuning is a longer process.
 
 ## A Map of Documentation
 
