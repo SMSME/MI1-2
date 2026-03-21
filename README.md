@@ -8,8 +8,9 @@
     - scikit-learn (v1.8.0) for evaluation metrics (e.g., MAE)
     - prophet (v1.3.0) for time-series modeling
     - dieboldmariano (v1.1.0) for forecast comparison (DM test)
-    - pyprojroot (v0.3.0) for robust project-path handling
+    - pyprojroot (v0.3.0) for project-path handling
     - matplotlib (v3.10.8) and seaborn (v0.13.2) for data visualization and plotting
+ - The platform used was Mac.
 
 ## Instructions for Reproducing Results
 ### Analysis
