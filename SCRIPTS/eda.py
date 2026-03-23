@@ -74,14 +74,18 @@ plt.close()
 
 # Load Raw Zillow to find original NaNs for rent
 df_z_raw = pd.read_csv('../DATA/Zillow_Rent_Data.csv')
+# Filter for UVA area zip code
 df_22903_raw = df_z_raw[df_z_raw['RegionName'] == 22903]
 date_cols = [c for c in df_z_raw.columns if '20' in c] # Identifies date columns
+# Melt from wide to long format such that we get one row per date
 df_rent_raw = df_22903_raw.melt(id_vars=['RegionName'], value_vars=date_cols, var_name='ds', value_name='y_raw')
 df_rent_raw['ds'] = pd.to_datetime(df_rent_raw['ds'])
 
 # Load Raw Employment to find original NaNs for employment
 df_e_raw = pd.read_csv('../DATA/Charlottesville_Employment_Data.csv', skiprows=10)
+# Melt from wide to long format such that we get one row per date
 df_e_long = df_e_raw.melt(id_vars=['Year'], var_name='Month', value_name='emp_raw')
+# Map month names to numbers for the 'ds' column
 month_map = {'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
              'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12}
 df_e_long['ds'] = pd.to_datetime(df_e_long['Year'].astype(str) + '-' + df_e_long['Month'].map(month_map).astype(str) + '-01') + MonthEnd(1)
@@ -126,12 +130,13 @@ plt.close()
 
 # Print statistics for each variable
 def print_stats(var_name, data, m_val, is_date=False):
+    # Describe the data and print the statistics
     stats = data.describe(percentiles=[.25, .5, .75])
     print(f"\nVariable: {var_name}")
     print(f"Status: {n}({m_val})")
     print(f"{'Statistic':<20} | {'Value':<15}")
     print("-" * 40)
-    
+    # If the variable is a date, print the statistics for the date
     if is_date:
         origin = data.min()
         days = (data - origin).dt.days
@@ -143,6 +148,7 @@ def print_stats(var_name, data, m_val, is_date=False):
         print(f"{'75th Percentile':<20} | {data.quantile(0.75).date()}")
         print(f"{'Maximum':<20} | {data.max().date()}")
     else:
+        # If the variable is not a date, print raw statistics for the variable
         print(f"{'Mean':<20} | {stats['mean']:,.2f}")
         print(f"{'Std. Deviation':<20} | {stats['std']:,.2f}")
         print(f"{'Minimum':<20} | {stats['min']:,.2f}")
@@ -151,7 +157,7 @@ def print_stats(var_name, data, m_val, is_date=False):
         print(f"{'75th Percentile':<20} | {stats['75%']:,.2f}")
         print(f"{'Maximum':<20} | {stats['max']:,.2f}")
 
-
+# pritnt final statistics for the variables
 print_stats("Date (ds)", df['ds'], m_ds, is_date=True)
 print_stats("Rent Index (y)", df['y'], m_y)
 print_stats("Employment Count", df['employment_count'], m_emp)
